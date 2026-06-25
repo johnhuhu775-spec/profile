@@ -1,118 +1,76 @@
 % !TeX TS-program = xelatex
 
 \documentclass{resume}
-\ResumeName{冯开宇}
-
-% 如果想插入照片，请使用以下两个库。
-% \usepackage{graphicx}
-% \usepackage{tikz}
+\ResumeName{周信航}
 
 \begin{document}
 
 \ResumeContacts{
-  (+86)188-8888-8888,%
-  \ResumeUrl{mailto:loveress01@outlook.com}{loveress01@outlook.com},%
-  \ResumeUrl{https://blog.fkynjyq.com}{blog.fkynjyq.com} \footnote{下划线内容包含超链接。},%
-  \ResumeUrl{https://github.com/fky2015}{github.com/fky2015}%
+  (+86)13382788320,%
+  \ResumeUrl{mailto:xxx@example.com}{zxhccp@163.com}%
 }
-
-% 如果想插入照片，请取消此代码的注释。
-% 但是默认不推荐插入照片，因为这不是简历的重点。
-% 如果默认的照片插入格式不能满足你的需求，你可以尝试调整照片的大小，或者使用其他的插入照片的方法。
-% 不然，也可以先渲染 PDF 简历，然后用其他工具在 PDF 上叠加照片。
-% \begin{tikzpicture}[remember picture, overlay]
-%   \node [anchor=north east, inner sep=1cm]  at (current page.north east) 
-%      {\includegraphics[width=2cm]{image.png}};
-% \end{tikzpicture}
 
 \ResumeTitle
 
 
 \section{教育经历}
 \ResumeItem
-[北京理工大学|硕士研究生]
-{北京理工大学}
-[\textnormal{网络空间安全，网络空间安全学院|}  学术型硕士研究生]
-[2021.09—2024.06（预计）]
+[大连理工大学|硕士研究生]
+{大连理工大学}
+[\textnormal{车辆工程专业，机械学院|}  硕士研究生]
+[2022.09—2025.06]
 
-\textbf{GPA: 3.62/4.0}，主要研究方向为\textbf{拜占庭共识算法}，在分布式系统领域方面有一定的研究和工程经验。\textbf{2024年应届生}。
-
-主要研究成果为：发表在 XXX 期刊上的论文《XXX》。
+% TODO: 补充GPA、研究方向、论文等信息
 
 \ResumeItem
-[北京理工大学|本科生]
-{北京理工大学}
-[\textnormal{计算机科学与技术，计算机学院|} 工学学士]
-[2017.09—2021.06]
+[南京工业大学|本科生]
+{南京工业大学}
+[\textnormal{车辆工程专业，机械学院|} 工学学士]
+[2018.09—2022.06]
 
-\textbf{GPA: 3.7/4.0(专业前 3\%)}，获学业奖学金多次，全国大学生 XYZ 竞赛二等奖（2次），ZYX 竞赛三等奖。
+% TODO: 补充GPA、奖项等信息
 
-\section[技术能力]{技术能力\protect\footnote{与求职岗位无关的技能省略或用灰色表示。}}
+\section{技术能力}
 \begin{itemize}
-  \item \textbf{语言}: 编程不受特定语言限制。常用 Rust, Golang, Python,C++； 熟悉 C, \GrayText{JavaScript}；了解 Lua, Java, \GrayText{TypeScript}。
-  \item \textbf{工作流}: Linux, Shell, (Neo)Vim, Git, GitHub, GitLab.
-  \item \textbf{其他}: 有容器化技术的实践经验，熟悉 Kubernetes 的使用。
+  \item \textbf{深度学习框架}: Python、PyTorch、PyTorch Lightning、HuggingFace Transformers、Hydra
+  \item \textbf{大模型与推理}: Qwen3-VL/Qwen3.5、vLLM、FlashAttention（含 \texttt{flash\_attn\_varlen\_func} 变长 packing）、M-RoPE、KV Cache
+  \item \textbf{训练基础设施}: DDP、bf16 混合精度、WebDataset、Ray、MLflow、Git
+  \item \textbf{研究方向}: 视觉-语言-动作（VLA）模型、自动驾驶端到端轨迹规划、多模态轨迹预测、世界模型、强化微调（GRPO）
 \end{itemize}
 
 \section{工作经历}
 
-\ResumeItem{北京 ABCD 有限公司}
-[后端开发实习生/XXXX]
-[2020.10—2021.03] 
+\ResumeItem{上海临港绝影智能科技有限公司}
+[算法工程师 / VLA 方向] % TODO: 如职位有出入请修改
+[2025.6—至今] % TODO: 补充入职时间
 
 \begin{itemize}
-  \item \textbf{独立负责XXX业务后端的设计、开发、测试和部署。}通过 FaaS、Kafka 等平台实现站内信模板渲染服务。向上游提供 SDK 代码，增加或升级了多种离线和在线逻辑。完成了业务对站内信的多样需求。
-  \item \textbf{参与 XXX 的需求分析，系统技术方案设计；完成需求开发、灰度测试、上线和监控。}
+  \item 参与自动驾驶 VLA（Vision-Language-Action）模型的预研与落地，覆盖从 VLM backbone 适配、轨迹规划 head 设计、训练框架搭建到典型场景效果验证的完整链路。
+  \item 推动多个关键能力上车前实验：单模态 / 多模态轨迹规划、指令变道、OCC 世界模型辅助、GRPO 强化微调。
 \end{itemize}
 
 \section{项目经历}
 
-\ResumeItem{\textbf{BusTub} 基于 C++ 的简易单机数据库}
-[ \textnormal{CMU 15-445} 课程]
-\begin{itemize}
-  \item 实现了基于可扩展哈希表和LRU-K的内存池管理。实现了可并发的B+树，支持乐观加锁的读写操作。
-  \item 采用火山模型实现了查询、修改、连接、聚合等查询执行器，对部分查询进行了改写与下推。
-  \item 采用 2PL 进行并发控制，支持死锁处理、多种隔离级别、表锁和行锁。
-  \item 对数据库系统有了基本的认识和实践。
-\end{itemize}
-
-
-\ResumeItem{\textbf{Multi-Raft} 分布式 \textbf{KV} 存储系统}
-[ \textnormal{MIT 6.824} 课程]
-\begin{itemize}
-  \item 实现了 Raft 协议的选举、日志复制、持久化、日志压缩等基本功能。
-  \item 基于 Raft 协议实现了满足线性一致性的 KV 数据库。
-  \item 采用 Multi-Raft 架构，支持数据分片，分片迁移，分片垃圾回收和分片迁移时读写优化。
-  \item 对分布式系统的设计考量有了更多的认识。
-\end{itemize}
-
-\ResumeItem{\textbf{ZYX} 平台下的某某共识算法设计与实现}
-[共识算法设计与实现]
-[2021.11—2022.07] 
+\ResumeItem{自动驾驶 VLA 端到端轨迹规划}
+[核心研发] % TODO: 如有团队规模/职责描述可替换
+[2026.02—至今]
 
 \begin{itemize}
-  \item 根据 ZYX (Rust 实现的开源区块链框架) 的架构，\textbf{修改并实现某某某共识算法}。
-  \item 针对系统进行性能测试，分析瓶颈，并优化吞吐量；TPS 由 1K 达到 6K。
-  \item 此项目为实验室研究项目的一部分。
-\end{itemize}
-
-\ResumeItem[BIThesis 北京理工大学毕设模板集合(开源项目)]
-{\ResumeUrl{https://github.com/BITNP/BIThesis}{\textbf{BIThesis} 北京理工大学毕设 \LaTeX 模板集合}}
-[主要维护者（开源项目）]
-[2020.04 — 今]
-
-\begin{itemize}
-  \item 根据相关排版要求，\textbf{利用 LaTeX3 (expl3) 设计了同时符合各个学位要求且支持灵活配置的宏包及多套模板}。
-  \item 需求开发和问题修复采用标准工作流，引入了回归测试与基于 GitHub Actions 的测试与持续集成。
-  \item 负责了什么什么；完成了怎样的结果。
+  \item \textbf{VLM 部署与场景理解评测}：基于 vLLM 部署 Qwen3-VL-8B-Instruct，构建典型驾驶场景测试集，评测模型对场景的理解能力、应采取动作的判断及完整推理链路输出。
+  \item \textbf{单模态轨迹规划 backbone}：以 Qwen3-VL 为骨干，前视双相机图像以 Image Encoding 与 Video Temporal Encoding 两种方案接入；自定义 \texttt{<|nav\_i|>} / \texttt{<|plan\_q\_i|>} 占位 token 注入导航路径与 plan query；解码侧采用可微分 unicycle action rollout，head 直出 \texttt{(accel, yaw\_rate)} 经积分得到 50 步轨迹。Video Temporal Encoding 方案相对历史 Image 方案训练吞吐提升 1.47×，\textbf{ADE 降低 15.3\%、FDE 降低 18.3\%}。
+  \item \textbf{训练性能优化}：通过 sequence packing + \texttt{flash\_attn\_varlen\_func} 变长注意力替换 Qwen3-VL 默认实现，配合 cu\_seqlens 边界传递与 3D 位置编码自定义计算，显著降低 padding 浪费、提升单卡吞吐。
+  \item \textbf{OCC 世界模型辅助任务}：设计稠密 BEV 占用栅格世界模型 head（Geometry PE：ego 坐标 + 多相机投影 UV 联合编码、4 层 cross-attention、200×120 BEV 网格），并通过 BEV→plan query 的 cross-attention fusion 将占用特征反哺规划。在相同训练 step 下 \textbf{ADE 提升 10\%、FDE 提升 13\%、miss rate 降低 14\%}。
+  \item \textbf{指令变道实验}：将 human command 文本注入 VLM 输入，通过在直行巡航场景注入 fake 变道指令验证模型响应能力，\textbf{fake 变道响应率接近 100\%}；同时模型能识别"最左侧车道无变道空间""路边停有死车"等场景并合理拒绝执行，证明模型具备一定的安全约束理解能力。
+  \item \textbf{轻量化 backbone 探索（Qwen3.5-0.8B）}：针对车端推理资源受限的问题，将 VLA backbone 由 Qwen3-VL-2B 替换为 Qwen3.5-0.8B。轨迹任务指标对齐 2B 效果，叠加 OCC 辅助任务后略有提升；Torch 推理耗时降低 4 倍，成功支持 10 Hz 车端在线推理。
+  \item \textbf{多模态轨迹规划}：基于 K-Means 聚类构建 256 锚轨迹库，head 输出 anchor 分类 + 残差回归，top1 指标略优于单模态；在汇入主路、进入辅路、施工绕行、跟车减速刹停等长尾场景输出高质量多模态轨迹。
+  \item \textbf{GRPO 强化微调框架}：从 0 搭建基于 GRPO（Group Relative Policy Optimization）的 VLA 强化微调 codebase，为后续轨迹质量奖励 / 安全奖励等多奖励信号下的策略优化提供基础设施。
 \end{itemize}
 
 \section{个人总结}
 
 \begin{itemize}
-  \item 本人乐观开朗、在校成绩优异、自驱能力强，具有良好的沟通能力和团队合作精神。
-  \item 可以使用英语进行工作交流（六级成绩 XXX），平时有阅读英文书籍和口语练习的习惯。
-  \item 有六年 Linux 使用经验，较为丰富的软件开发经验、开源项目贡献和维护经验。善于技术写作，持续关注互联网技术发展。
+  \item 具备从 VLM 适配、训练加速、Head 架构设计到指标验证的端到端落地能力，熟悉 Qwen3-VL 系列模型内部机制（M-RoPE、视觉 patch 化、packing 注意力）；关注训练效率与工程化质量，主动推进 packing/flash-attention/混合精度等基础设施优化以缩短迭代周期。
+  \item 持续跟进 VLA、世界模型、强化微调等前沿方向，乐于把论文方法快速转化为可复现的实验代码。
 \end{itemize}
 
 
