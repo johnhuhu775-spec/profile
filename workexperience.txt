@@ -1,0 +1,20 @@
+VLA项目
+1. 使用vLLM部署Qwen3-VL-8b-Instruct，测试典型场景下Qwen3-VL对场景的理解，输出应该采取的aciton以及推理过程
+2. 单模态轨迹输出backbone构建与优化：（packing机制,flash-attention；解码时使用action rollout；前视2V,image、Video Temporal Encoding作为输入）
+3. 3d grounding
+4. 指令变道。实验。将指令变道加入vlm的输入，通过在直行巡航场景fake 变道命令验证有效性。fake的变道响应率接近100%。且对于没有变道空间的场景，比如在最左侧车道、路边有死车，即使有human cmd也不会响应
+5. occ world model辅助实验。OCC World Model 作为辅助任务有效提升了轨迹预测性能。 同 step 下 ADE 提升 10%，FDE 提升 13%，miss rate 降低 14%
+6. 多模态轨迹实验 top1指标略好于单模态指标；能够输出合理的多模态轨迹，在汇入主路，进入辅路、施工，绕行，跟车减速刹停等场景均能输出高质量轨迹
+7. GRPO微调 codebase构建
+
+优化项：
+1.又更新了 Qwen3.5 0.8B的工作：背景是Qwen3-VL-2B在车端推理比较吃力，希望可以降低参数量，显著加快车端推理的速度，因此尝试将backbone改为Qwen3.5-0.8B
+在轨迹任务上，Qwen3.5-0.8B的模型指标对齐了Qwen3-VL-2B的效果，加上occ的辅助任务后，甚至效果略好。torch推理耗时降低4倍。支持10HZ
+2.去掉关于3d grounding任务的部分
+3.多模态轨迹规划部分工作放在倒数第二条和grpo靠近
+4.工作能力那把语言去掉，在深度学习框架那条放入python；大模型与推理那去掉Qwen2.5-VL,替换为Qwen3.5；训练基础那多机多卡DDP直接改为DDP
+5.工作经历第一条“主导”换成更谦虚一点的说法，第二条去掉 3Dgrounding
+6.个人总结部分去掉第二条，第一三条合并叙述
+7.以 Qwen3-VL 为骨干，前视双相机图像为输入实现image encoding方案和Video temporal encoding方案；自定义 \texttt{<|nav\_i|>} / \texttt{<|plan\_q\_i|>} 占位 token 注入navi与 plan query；解码侧采用可微分 unicycle action rollout，head 直出 \texttt{(accel, yaw\_rate)} 经积分得到 50 步轨迹
+vedio版相对于历史image方案实现训练吞吐量x1.47，ade降低15.3%;fde降低18.3%
+8.再加一个工作经历模块： 2025年9月-2025年12月  轨迹预测。基于simpl模型适配业务数据，部署上车b并迭代优化。对于他车cut in行为预测不及时问题，设计自车与他车抢让行交互关系的yoi head，有效优化该问题
