@@ -1,9 +1,18 @@
 % !TeX TS-program = xelatex
 
 \documentclass{resume}
+\usepackage{graphicx}
+\usepackage{tikz}
 \ResumeName{周信航}
 
 \begin{document}
+
+% 照片绝对定位到页面右上角，不占用正文排版空间
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north east, inner sep=0pt, xshift=-1.2cm, yshift=-0.6cm]
+    at (current page.north east)
+    {\includegraphics[height=3cm, keepaspectratio=true]{main.jpg}};
+\end{tikzpicture}
 
 \ResumeContacts{
   (+86)13382788320,%
@@ -33,7 +42,7 @@
 \section{技术能力}
 \begin{itemize}
   \item \textbf{深度学习框架}: Python、PyTorch、PyTorch Lightning、HuggingFace Transformers、Hydra
-  \item \textbf{大模型与推理}: Qwen3-VL/Qwen3.5、vLLM、FlashAttention（含 \texttt{flash\_attn\_varlen\_func} 变长 packing）、M-RoPE、KV Cache
+  \item \textbf{大模型与推理}: Qwen3-VL/Qwen3.5、vLLM、FlashAttention、M-RoPE、KV Cache
   \item \textbf{训练基础设施}: DDP、bf16 混合精度、WebDataset、Ray、MLflow、Git
   \item \textbf{研究方向}: 视觉-语言-动作（VLA）模型、自动驾驶端到端轨迹规划、多模态轨迹预测、世界模型、强化微调（GRPO）
 \end{itemize}
