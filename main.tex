@@ -9,7 +9,7 @@
 
 % 照片绝对定位到页面右上角，不占用正文排版空间
 \begin{tikzpicture}[remember picture, overlay]
-  \node[anchor=north east, inner sep=0pt, xshift=-1.2cm, yshift=-0.4cm]
+  \node[anchor=north east, inner sep=0pt, xshift=-1.2cm, yshift=-1cm]
     at (current page.north east)
     {\includegraphics[height=3.4cm, keepaspectratio=true]{main.jpg}};
 \end{tikzpicture}
@@ -21,6 +21,7 @@
 
 \ResumeTitle
 
+\vspace{1em}
 
 \section{教育经历}
 \ResumeItem
@@ -55,14 +56,14 @@
 
 \begin{itemize}
   \item 参与自动驾驶 VLA（Vision-Language-Action）模型的预研与落地，覆盖从 VLM backbone 适配、轨迹规划 head 设计、训练框架搭建到典型场景效果验证的完整链路。
-  \item 推动多个关键能力上车前实验：单模态 / 多模态轨迹规划、指令变道、OCC 世界模型辅助、GRPO 强化微调。
+  \item 推动多个关键能力上车前实验：单模态 / 多模态轨迹规划、指令变道、施工绕行、OCC 世界模型辅助、GRPO 强化微调等。
 \end{itemize}
 
 \section{项目经历}
 
 \ResumeItem{自动驾驶 VLA 端到端轨迹规划}
 [核心研发] % TODO: 如有团队规模/职责描述可替换
-[2026.02—至今]
+[2025.06—至今]
 
 \begin{itemize}
   \item \textbf{VLM 部署与场景理解评测}：基于 vLLM 部署 Qwen3-VL-8B-Instruct，构建典型驾驶场景测试集，评测模型对场景的理解能力、应采取动作的判断及完整推理链路输出。
@@ -71,23 +72,15 @@
   \item \textbf{OCC 世界模型辅助任务}：设计稠密 BEV 占用栅格世界模型 head（Geometry PE：ego 坐标 + 多相机投影 UV 联合编码、4 层 cross-attention、200×120 BEV 网格），并通过 BEV→plan query 的 cross-attention fusion 将占用特征反哺规划。在相同训练 step 下 \textbf{ADE 提升 10\%、FDE 提升 13\%、miss rate 降低 14\%}。
   \item \textbf{指令变道实验}：将 human command 文本注入 VLM 输入，通过在直行巡航场景注入 fake 变道指令验证模型响应能力，\textbf{fake 变道响应率接近 100\%}；同时模型能识别"最左侧车道无变道空间""路边停有死车"等场景并合理拒绝执行，证明模型具备一定的安全约束理解能力。
   \item \textbf{轻量化 backbone 探索（Qwen3.5-0.8B）}：针对车端推理资源受限的问题，将 VLA backbone 由 Qwen3-VL-2B 替换为 Qwen3.5-0.8B。轨迹任务指标对齐 2B 效果，叠加 OCC 辅助任务后略有提升；Torch 推理耗时降低 4 倍，成功支持 10 Hz 车端在线推理。
-  \item \textbf{多模态轨迹规划}：基于 K-Means 聚类构建 256 锚轨迹库，head 输出 anchor 分类 + 残差回归，top1 指标略优于单模态；在汇入主路、进入辅路、施工绕行、跟车减速刹停等长尾场景输出高质量多模态轨迹。
+  \item \textbf{多模态轨迹规划}：基于 K-Means 聚类构建 64 锚轨迹库，head 输出 anchor 分类 + 残差回归，top1 指标略优于单模态；在汇入主路、进入辅路、施工绕行、跟车减速刹停等长尾场景输出高质量多模态轨迹。
   \item \textbf{GRPO 强化微调框架}：从 0 搭建基于 GRPO（Group Relative Policy Optimization）的 VLA 强化微调 codebase，为后续轨迹质量奖励 / 安全奖励等多奖励信号下的策略优化提供基础设施。
-\end{itemize}
-
-\ResumeItem{自动驾驶轨迹预测}
-[核心研发]
-[2025.09—2025.12]
-
-\begin{itemize}
-  \item 基于 SIMPL 模型完成业务数据适配，将轨迹预测模型部署上车并持续迭代优化。
-  \item 针对他车 cut-in 行为预测不及时的问题，设计自车与他车抢让行交互关系建模的 YOI head，有效提升了该场景下的预测及时性。
 \end{itemize}
 
 \section{个人总结}
 
 \begin{itemize}
-  \item 具备从 VLM 适配、训练加速、Head 架构设计到指标验证的端到端落地能力，熟悉 Qwen3-VL、3.5等系列模型内部机制（M-RoPE、视觉 patch 化、packing 注意力）；关注训练效率与工程化质量，主动推进 packing/flash-attention/混合精度等基础设施优化以缩短迭代周期。
+  \item 具备从 VLM 适配、训练加速、Head 架构设计到指标验证的端到端落地能力，熟悉 Qwen3-VL、3.5等系列模型内部机制（M-RoPE、视觉 patch 化、packing 注意力）。
+  \item 关注训练效率与工程化质量，主动推进 packing/flash-attention/混合精度等基础设施优化以缩短迭代周期。
   \item 持续跟进 VLA、世界模型、强化微调等前沿方向，乐于把论文方法快速转化为可复现的实验代码。
 \end{itemize}
 

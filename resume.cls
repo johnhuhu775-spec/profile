@@ -25,7 +25,7 @@
 \pagestyle{empty}
 
 % Adopt A4 style but with smaller margins.
-\geometry{a4paper,top=0.5cm,left=1cm,right=1cm, bottom=0.5cm}
+\geometry{a4paper,top=0.9cm,left=1cm,right=1cm, bottom=0.5cm}
 
 %%% Global Variables %%%
 
