@@ -67,13 +67,13 @@
 
 \begin{itemize}
   \item \textbf{VLM 部署与场景理解评测}：基于 vLLM 部署 Qwen3-VL-8B-Instruct，构建典型驾驶场景测试集，评测模型对场景的理解能力、应采取动作的判断及完整推理链路输出。
-  \item \textbf{单模态轨迹规划 backbone}：以 Qwen3-VL 为骨干，前视双相机图像以 Image Encoding 与 Video Temporal Encoding 两种方案接入；自定义 \texttt{<|nav\_i|>} / \texttt{<|plan\_q\_i|>} 占位 token 注入导航路径与 plan query；解码侧采用可微分 unicycle action rollout，head 直出 \texttt{(accel, yaw\_rate)} 经积分得到 50 步轨迹。Video Temporal Encoding 方案相对历史 Image 方案训练吞吐提升 1.47×，\textbf{ADE 降低 15.3\%、FDE 降低 18.3\%}。
+  \item \textbf{单模态轨迹规划}：以 Qwen3-VL 为骨干，前视双相机图像以 Image Encoding 与 Video Temporal Encoding 两种方案接入；自定义 \texttt{<|nav\_i|>} / \texttt{<|plan\_q\_i|>} 占位 token 注入导航路径与 plan query；解码侧采用可微分 unicycle action rollout，head 直出 \texttt{(accel, yaw\_rate)} 经积分得到 50 步轨迹。Video Temporal Encoding 方案相对历史 Image 方案训练吞吐提升 1.47×，\textbf{ADE 降低 15.3\%、FDE 降低 18.3\%}。
   \item \textbf{训练性能优化}：通过 sequence packing + \texttt{flash\_attn\_varlen\_func} 变长注意力替换 Qwen3-VL 默认实现，配合 cu\_seqlens 边界传递与 3D 位置编码自定义计算，显著降低 padding 浪费、提升单卡吞吐。
-  \item \textbf{OCC 世界模型辅助任务}：设计稠密 BEV 占用栅格世界模型 head（Geometry PE：ego 坐标 + 多相机投影 UV 联合编码、4 层 cross-attention、200×120 BEV 网格），并通过 BEV→plan query 的 cross-attention fusion 将占用特征反哺规划。在相同训练 step 下 \textbf{ADE 提升 10\%、FDE 提升 13\%、miss rate 降低 14\%}。
+  \item \textbf{OCC 世界模型辅助任务}：设计稠密 BEV 占用栅格世界模型 head（4 层 cross-attention、200×120 BEV 网格融合 vision 特征），并通过 BEV→plan query 的 cross-attention fusion 将占用特征反哺规划。在相同训练 step 下 \textbf{ADE 提升 10\%、FDE 提升 13\%、miss rate 降低 14\%}。
   \item \textbf{指令变道实验}：将 human command 文本注入 VLM 输入，通过在直行巡航场景注入 fake 变道指令验证模型响应能力，\textbf{fake 变道响应率接近 100\%}；同时模型能识别"最左侧车道无变道空间""路边停有死车"等场景并合理拒绝执行，证明模型具备一定的安全约束理解能力。
-  \item \textbf{轻量化 backbone 探索（Qwen3.5-0.8B）}：针对车端推理资源受限的问题，将 VLA backbone 由 Qwen3-VL-2B 替换为 Qwen3.5-0.8B。轨迹任务指标对齐 2B 效果，叠加 OCC 辅助任务后略有提升；Torch 推理耗时降低 4 倍，成功支持 10 Hz 车端在线推理。
+  \item \textbf{轻量化 backbone 探索（Qwen3.5-0.8B）}：针对车端推理资源受限的问题，将 VLA backbone 由 Qwen3-VL-2B 替换为 Qwen3.5-0.8B。轨迹任务指标对齐 2B 效果，叠加 OCC 辅助任务后略有提升；Torch 推理耗时降低 4 倍，支持 10 Hz 车端在线推理。
   \item \textbf{多模态轨迹规划}：基于 K-Means 聚类构建 64 锚轨迹库，head 输出 anchor 分类 + 残差回归，top1 指标略优于单模态；在汇入主路、进入辅路、施工绕行、跟车减速刹停等长尾场景输出高质量多模态轨迹。
-  \item \textbf{GRPO 强化微调框架}：从 0 搭建基于 GRPO（Group Relative Policy Optimization）的 VLA 强化微调 codebase，为后续轨迹质量奖励 / 安全奖励等多奖励信号下的策略优化提供基础设施。
+  \item \textbf{GRPO 强化微调框架}：搭建基于 GRPO（Group Relative Policy Optimization）的 VLA 强化微调 codebase，为后续轨迹质量奖励 / 安全奖励等多奖励信号下的策略优化提供基础设施。
 \end{itemize}
 
 \section{个人总结}
